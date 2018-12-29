@@ -1,0 +1,6 @@
+module MUX2X1_16BIT(out,s0,in0,in1);
+   input[15:0] in0,in1;
+   output [15:0] out;
+   input 	 s0;
+   MUX2X1 mux0[15:0](out,s0,in0,in1);
+endmodule // MUX2X1_16BIT

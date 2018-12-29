@@ -1,0 +1,5 @@
+module INCREMENTER(s,in);
+   input[15:0] in;
+   output [15:0] s;
+   ADDER_16BIT add0(s,,16'b0000000000000001,in,1'b0);
+endmodule // INCREMENTER

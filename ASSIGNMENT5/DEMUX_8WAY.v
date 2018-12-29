@@ -1,0 +1,12 @@
+module DEMUX_8WAY(out0,out1,out2,out3,out4,out5,out6,out7,s2,s1,s0,in);
+   input s2,s1,s0,in;
+   output out0,out1,out2,out3,out4,out5,out6,out7;
+   DEMUX1X2 demux0(w0,w1,s2,in);
+   DEMUX1X2 demux1(w2,w3,s1,w0);
+   DEMUX1X2 demux2(w4,w5,s1,w1);
+   DEMUX1X2 demux3(out0,out1,s0,w2);
+   DEMUX1X2 demux4(out2,out3,s0,w3);
+   DEMUX1X2 demux5(out4,out5,s0,w4);
+   DEMUX1X2 demux6(out6,out7,s0,w5);
+endmodule // DEMUX_8WAY
+

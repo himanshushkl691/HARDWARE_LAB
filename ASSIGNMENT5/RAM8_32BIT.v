@@ -1,0 +1,45 @@
+module RAM8_32BIT(out,in,write,address,clk,en);
+   input[31:0] in;
+   input       write,clk,en;
+   input [2:0] address;
+   output [31:0] out;
+   wire [0:7] 	 tmp;
+   DEMUX_8WAY demux0(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5],tmp[6],tmp[7],address[2],address[1],address[0],en);
+   wire [31:0] 	 out0,out1,out2,out3,out4,out5,out6,out7;
+   REGISTER_32BIT reg0(out0,write,in,clk,tmp[0]);
+   REGISTER_32BIT reg1(out1,write,in,clk,tmp[1]);
+   REGISTER_32BIT reg2(out2,write,in,clk,tmp[2]);
+   REGISTER_32BIT reg3(out3,write,in,clk,tmp[3]);
+   REGISTER_32BIT reg4(out4,write,in,clk,tmp[4]);
+   REGISTER_32BIT reg5(out5,write,in,clk,tmp[5]);
+   REGISTER_32BIT reg6(out6,write,in,clk,tmp[6]);
+   REGISTER_32BIT reg7(out7,write,in,clk,tmp[7]);
+   wire [31:0] 	 OUT0,OUT1,OUT2,OUT3,OUT4,OUT5,OUT6,OUT7;
+   wire [31:0] 	 sx0,sx1,sx2,sx3,sx4,sx5,sx6,sx7;
+   MUX2X1_32BIT mux0(sx0,tmp[0],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux1(sx1,tmp[1],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux2(sx2,tmp[2],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux3(sx3,tmp[3],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux4(sx4,tmp[4],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux5(sx5,tmp[5],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux6(sx6,tmp[6],0,32'b11111111111111111111111111111111);
+   MUX2X1_32BIT mux7(sx7,tmp[7],0,32'b11111111111111111111111111111111);
+   AND_32BIT and0(OUT0,sx0,out0);
+   AND_32BIT and1(OUT1,sx1,out1);
+   AND_32BIT and2(OUT2,sx2,out2);
+   AND_32BIT and3(OUT3,sx3,out3);
+   AND_32BIT and4(OUT4,sx4,out4);
+   AND_32BIT and5(OUT5,sx5,out5);
+   AND_32BIT and6(OUT6,sx6,out6);
+   AND_32BIT and7(OUT7,sx7,out7);
+   wire [31:0] 	 out8,out9,out10,out11,out12,out13;
+   OR_32BIT or0(out8,OUT0,OUT1);
+   OR_32BIT or1(out9,out8,OUT2);
+   OR_32BIT or2(out10,out9,OUT3);
+   OR_32BIT or3(out11,out10,OUT4);
+   OR_32BIT or4(out12,out11,OUT5);
+   OR_32BIT or5(out13,out12,OUT6);
+   OR_32BIT or6(out,out13,OUT7);
+endmodule // RAM8_32BIT
+
+   

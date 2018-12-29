@@ -1,0 +1,40 @@
+module SUBTRACTOR(diff,borr,a,b,bin);
+   input[31:0] a,b;
+   input       bin;
+   output [31:0] diff;
+   output 	 borr;
+   FULL_SUB fs0(diff[0],c,a[0],b[0],bin);
+   FULL_SUB fs1(diff[1],d,a[1],b[1],c);
+   FULL_SUB fs2(diff[2],e,a[2],b[2],d);
+   FULL_SUB fs3(diff[3],f,a[3],b[3],e);
+   FULL_SUB fs4(diff[4],g,a[4],b[4],f);
+   FULL_SUB fs5(diff[5],h,a[5],b[5],g);
+   FULL_SUB fs6(diff[6],i,a[6],b[6],h);
+   FULL_SUB fs7(diff[7],j,a[7],b[7],i);
+   FULL_SUB fs8(diff[8],k,a[8],b[8],j);
+   FULL_SUB fs9(diff[9],l,a[9],b[9],k);
+   FULL_SUB fs10(diff[10],m,a[10],b[10],l);
+   FULL_SUB fs11(diff[11],n,a[11],b[11],m);
+   FULL_SUB fs12(diff[12],o,a[12],b[12],n);
+   FULL_SUB fs13(diff[13],p,a[13],b[13],o);
+   FULL_SUB fs14(diff[14],q,a[14],b[14],p);
+   FULL_SUB fs15(diff[15],r,a[15],b[15],q);
+
+   FULL_SUB fs16(diff[16],s,a[16],b[16],r);
+   FULL_SUB fs17(diff[17],t,a[17],b[17],s);
+   FULL_SUB fs18(diff[18],u,a[18],b[18],t);
+   FULL_SUB fs19(diff[19],v,a[19],b[19],u);
+   FULL_SUB fs20(diff[20],w,a[20],b[20],v);
+   FULL_SUB fs21(diff[21],x,a[21],b[21],w);
+   FULL_SUB fs22(diff[22],y,a[22],b[22],x);
+   FULL_SUB fs23(diff[23],z,a[23],b[23],y);
+   FULL_SUB fs24(diff[24],a0,a[24],b[24],z);
+   FULL_SUB fs25(diff[25],b0,a[25],b[25],a0);
+   FULL_SUB fs26(diff[26],c0,a[26],b[26],b0);
+   FULL_SUB fs27(diff[27],d0,a[27],b[27],c0);
+   FULL_SUB fs28(diff[28],e0,a[28],b[28],d0);
+   FULL_SUB fs29(diff[29],f0,a[29],b[29],e0);
+   FULL_SUB fs30(diff[30],g0,a[30],b[30],f0);
+   FULL_SUB fs31(diff[31],borr,a[31],b[31],g0);
+   
+endmodule // SUBTRACTOR

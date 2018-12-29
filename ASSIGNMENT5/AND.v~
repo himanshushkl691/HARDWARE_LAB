@@ -1,0 +1,6 @@
+module (out,in0,in1);
+   input in0,in1;
+   output out;
+   wire   w0;
+   nand(w0,in0,in1);
+   

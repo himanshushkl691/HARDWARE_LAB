@@ -1,0 +1,23 @@
+module ADDER_16BIT(sum,carry,a,b,cin);
+   input[15:0] a,b;
+   output [15:0] sum;
+   input cin;
+   output carry;
+   wire c,d,e,f,g,h,i,j,k,l,m,n,o,p,q;
+   FULL_ADDER fa1(sum[0],c,a[0],b[0],cin);
+   FULL_ADDER fa2(sum[1],d,a[1],b[1],c);
+   FULL_ADDER fa3(sum[2],e,a[2],b[2],d);
+   FULL_ADDER fa4(sum[3],f,a[3],b[3],e);
+   FULL_ADDER fa5(sum[4],g,a[4],b[4],f);
+   FULL_ADDER fa6(sum[5],h,a[5],b[5],g);
+   FULL_ADDER fa7(sum[6],i,a[6],b[6],h);
+   FULL_ADDER fa8(sum[7],j,a[7],b[7],i);
+   FULL_ADDER fa9(sum[8],k,a[8],b[8],j);
+   FULL_ADDER fa10(sum[9],l,a[9],b[9],k);
+   FULL_ADDER fa11(sum[10],m,a[10],b[10],l);
+   FULL_ADDER fa12(sum[11],n,a[11],b[11],m);
+   FULL_ADDER fa13(sum[12],o,a[12],b[12],n);
+   FULL_ADDER fa14(sum[13],p,a[13],b[13],o);
+   FULL_ADDER fa15(sum[14],q,a[14],b[14],p);
+   FULL_ADDER fa16(sum[15],carry,a[15],b[15],q);
+endmodule // ADDER_16BIT
