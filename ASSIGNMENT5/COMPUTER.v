@@ -3,6 +3,7 @@ module COMPUTER(out,instruction,address,reset,x0,y0);
    input [2:0] address;
    input       reset;
    output[31:0] out;
+   reg[31:0] out;
    reg[31:0] x01,y01;
    //RAM
    reg [31:0] 	 in0;
@@ -15,7 +16,8 @@ module COMPUTER(out,instruction,address,reset,x0,y0);
    reg 		 inc,jump,reset1,clk1;
    //ALU
    reg [31:0] 	 x,y;
-   reg 		 s1,s0;
+   reg 		 s0;
+   wire[31:0] out2;
    //INSTRUCTION REGISTER
    reg [31:0] 	 reg0;
    //DECODER
@@ -23,33 +25,17 @@ module COMPUTER(out,instruction,address,reset,x0,y0);
    //VARIABLES DEFINED
    RAM8_32BIT ram0(out0,in0,write0,adr,clk0,en0);
    PC pc0(out1,in1,inc,jump,reset1,clk1);
-   ALU alu0(out,s1,s0,x,y);
+   ALU alu0(out2,s0,x,y);
    always@(*)
      begin
 	x01 = x0;
 	y01 = y0;
 	en0 = 1'b1;
-	#2;
 	in0 = instruction;
 	write0 = 1'b1;
 	adr = address;
-	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;write0 = 1'b0;
-	
-	#2;
-	in0 = x01;
-	write0 = 1'b1;
-	adr = 3;
-	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;write0 = 1'b0;
-	
-	#2;
-	in0 = y01;
-	write0 = 1'b1;
-	adr = 4;
-	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;write0 = 1'b0;
-	#2;
-	
+	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;write0 = 1'b0;#2;
 	//FETCHING
-
 	//Reset PC or Not
 	reset1 = reset;
 	inc = 1'b0;
@@ -78,29 +64,31 @@ module COMPUTER(out,instruction,address,reset,x0,y0);
 	tmp2[2] = out0[2];
 	tmp2[1] = out0[1];
 	tmp2[0] = out0[0];
-	
+	s0 = out0[12];#2;
+	in0 = y01;
+	write0 = 1'b1;
+	adr = tmp1;
+	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;write0 = 1'b0;#2;
+	in0 = x01;
+	write0 = 1'b1;
+	adr = tmp2;
+	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;write0 = 1'b0;#2;	
 	//tmp2 is second operand address
 	//DECODING DONE
-	#2;
 	//EXECUTION
-	s1 = out0[13];	
-	s0 = out0[12];
 	write0 = 1'b0;
-	adr = tmp1;/*
-	adr[2] = tmp1[2];
-	adr[1] = tmp1[1];
-	adr[0] = tmp1[0];*/	
+	adr = tmp1;
 	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;	
 	x = out0;
 	write0 = 1'b0;
 	adr = tmp2;	
 	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;
-	y = out0;
-	#2;
-	in0 = out;
+	y = out0;#2;
+	in0 = out2;
 	write0 = 1'b1;
 	adr = tmp0;
-	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;	
+	clk0 = 1'b0;#2;clk0 = 1'b1;#2;clk0 = 1'b0;#2;
+	out = out0;
 	write0 = 1'b0;
        	//EXECUTION DONE
 	#2;

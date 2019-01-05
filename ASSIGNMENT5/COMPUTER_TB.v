@@ -4,21 +4,19 @@ module COMPUTER_TB;
    reg [2:0]  address;
    reg 	      reset;
    COMPUTER comp0(out,instruction,address,reset,x,y);
+   integer i,j;
    initial
      begin
 	x = 3;y = 4;
-	instruction = 32'b00000000000000000000010101000011;
-	address = 0;
-	reset = 1'b1;
-	#100;
-	x = 5;y=16;
-	instruction = 32'b00000000000000000001010101000011;
-	address = 1;
-	reset = 1'b0;
-	#100;
-	x = 5;y = 16;
-	instruction = 32'b00000000000000000010010101000011;
-	address = 2;
-	reset = 1'b0;
+	j = y;
+	y = 3;
+	for (i = 1;i<j;i= i+1)
+	begin
+		instruction = 32'b00000000000000000000010100110100;
+		address = 0;
+		reset = 1'b1;
+		x <= out;
+		#1000;
+	end
      end
 endmodule // COMPUTER_TB
